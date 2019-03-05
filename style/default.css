@@ -1,0 +1,20 @@
+body {
+	margin: 0px;
+	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+}
+
+#header {
+	height: 6vh;
+	background-color: red;
+	font-size: 5vh;
+	display: flex;
+}
+
+#content {
+	background-color: green;
+}
+
+#footer {
+	height: 7vh;
+	background-color: orange;
+}
