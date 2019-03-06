@@ -1,20 +1,59 @@
+:root {
+	--header-color: red;
+	--bg: hsl(34, 53%, 82%);
+	--bl: rgba(0, 0, 0, 0);
+	--c1: hsla(197, 62%, 11%, 0.5);
+	--c2: hsla(35, 91%, 65%, 0.5);
+	--c3: hsla(5, 53%, 63%, 0.5);
+}
+
+html {
+	background-color: var(--bg);
+	background-image: repeating-linear-gradient(45deg, transparent 5px,  5px, var(--c1) 10px,
+			var(--bl) 10px, var(--bl) 35px,  35px, var(--c2) 40px,
+			var(--c1) 40px, var(--c1) 50px, var(--bl) 50px, var(--bl) 60px,
+			var(--c2) 60px, var(--c2) 70px, var(--c3) 70px, var(--c3) 80px,
+			var(--bl) 80px, var(--bl) 90px, var(--c2) 90px, var(--c2) 110px,
+			var(--bl) 110px, var(--bl) 120px, var(--c1) 120px, var(--c1) 140px 
+		), repeating-linear-gradient(135deg, transparent 5px, var(--c1) 5px, var(--c1) 10px, 
+			var(--bl) 10px, var(--bl) 35px, var(--c2) 35px, var(--c2) 40px,
+			var(--c1) 40px, var(--c1) 50px, var(--bl) 50px, var(--bl) 60px,
+			var(--c2) 60px, var(--c2) 70px, var(--c3) 70px, var(--c3) 80px,
+			var(--bl) 80px, var(--bl) 90px, var(--c2) 90px, var(--c2) 110px,
+			var(--bl) 110px, var(--bl) 140px, var(--c1) 140px, var(--c1) 160px 
+	);
+}
+
 body {
 	margin: 0px;
 	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
 }
 
 #header {
-	height: 6vh;
-	background-color: red;
-	font-size: 5vh;
+	height: 2rem;
+	background-color: var(--header-color);
 	display: flex;
+	padding-left: 1rem;
+	padding-right: 0.25rem;
+}
+
+#title {
+	font-size: 1.5rem;
+	margin-right: auto;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#date {
+	font-size: 1rem;
+	white-space: nowrap;
 }
 
 #content {
 	background-color: green;
-}
-
-#footer {
-	height: 7vh;
-	background-color: orange;
+	padding: 1rem;
+	margin: 1rem;
+	margin-top: 0;
+	border-radius: 0 0 1rem 1rem;
 }
