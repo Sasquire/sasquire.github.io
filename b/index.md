@@ -1,7 +1,7 @@
 ---
 layout: "default"
 title: "blurbs"
-date: "2019-03-04"
+date: ""
 ---
 
 # Here is a blurb index
@@ -16,10 +16,12 @@ date: "2019-03-04"
 	</thead>
 	<tbody>
 		{% for page in site.pages %}
-			<tr>
-				<td><a href="{{ page.url }}">{{ page.title }}</a></td>
-				<td>{{ page.date }}</td>
-			</tr>
+			{% if page.url contains "/b" and page.url != "/b/" %}
+				<tr>
+					<td><a href="{{ page.url }}">{{ page.title }}</a></td>
+					<td>{{ page.date }}</td>
+				</tr>
+			{% endif %}
 		{% endfor %}
 	</tbody>
 </table>
