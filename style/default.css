@@ -1,6 +1,5 @@
 :root {
-	--base-color: black;
-	--background: #fff2;
+	--base-color: #000d; /* I really wanted body and html to be different colors */
 	--header: #fff2;
 	--body: #fff3;
 	--code-background: #0006;
@@ -21,17 +20,14 @@ html { background-color: var(--base-color); }
 
 body {
 	margin: 0px;
-	padding-bottom: 1px; /* extends to bottom of page */
 	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
 	tab-size: 4;
-	background-color: var(--background);
 	color: var(--text-color);
 }
 
 #header {
 	height: 2rem;
 	background-color: var(--header);
-	color: var(--header-text);
 	display: flex;
 	padding-left: 1rem;
 	padding-right: 0.25rem;
@@ -52,15 +48,13 @@ body {
 
 #content {
 	background-color: var(--body);
-	color: var(--body-text);
 	padding: 1rem;
 	margin: 1rem;
 	margin-top: 0;
 	border-radius: 0 0 1rem 1rem;
 }
 
-a { color: var(--string); }
-a:visited { color: var(--number); }
+a { color: var(--number); }
 
 .small-img {
 	width: 256px;
@@ -74,7 +68,6 @@ a:visited { color: var(--number); }
 p > .highlighter-rouge,
 .highlight > pre {
 	background-color: var(--code-background);
-	color: var(--code-text);
 	padding: 0.2rem;
 	border-radius: 0.2rem;
 }
