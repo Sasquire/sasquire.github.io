@@ -54,7 +54,7 @@ const colors = [
 	'blue',
 	'purple'
 ];
-const p = /hello[^]+world/g;
+
 readFileSync('points.csv', 'utf8')
 	.slice(0, -1) // removes the last newline
 	.split('\n')
