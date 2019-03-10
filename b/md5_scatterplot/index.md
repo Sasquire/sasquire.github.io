@@ -1,5 +1,7 @@
 ---
 layout: "default"
+title: "md5_scatterplot"
+date: "2019-03-05"
 ---
 
 # Scatterplot of md5sums
@@ -24,12 +26,12 @@ I was using the `hex_to_int` that was found in this [StackOverflow Answer by Pie
 ```sql
 create or replace function hex_to_int(hexval text) returns int as $$
 select
-  (get_byte(x,0)::int<<(3*8)) |
-  (get_byte(x,1)::int<<(2*8)) |
-  (get_byte(x,2)::int<<(1*8)) |
-  (get_byte(x,3)::int)
+	(get_byte(x, 0)::int << (3*8)) |
+	(get_byte(x, 1)::int << (2*8)) |
+	(get_byte(x, 2)::int << (1*8)) |
+	(get_byte(x, 3)::int)
 from (
-  select decode(lpad($1, 8, '0'), 'hex') as x
+	select decode(lpad($1, 8, '0'), 'hex') as x
 ) as a;
 $$
 language sql strict immutable;
@@ -52,14 +54,14 @@ const colors = [
 	'blue',
 	'purple'
 ];
-
+const p = /hello[^]+world/g;
 readFileSync('points.csv', 'utf8')
 	.slice(0, -1) // removes the last newline
 	.split('\n')
 	.map(line => line.split(',').map(e => parseInt(e)))
 	.forEach(([x, y, count]) => {
 		ctx.fillStyle = colors[count] || 'pink';
-        ctx.fillRect(x, y, 1, 1);
+		ctx.fillRect(x, y, 1, 1);
 	});
 
 writeFileSync('./heatmap.png', canvas.toBuffer());
@@ -67,4 +69,4 @@ writeFileSync('./heatmap.png', canvas.toBuffer());
 
 And there we have it, a meaningless scatterplot in all its glory. You may want to open it in a new tab. The image is 4096x4096 and is about 2 MB.
 
-![](https://idem.neocities.org/md5_scatterplot/scatterplot.png)
+<img class="small-img" src="scatterplot.png" alt="scatterplot">
