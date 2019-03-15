@@ -1,7 +1,7 @@
 ---
 layout: "default"
 title: "file_size_over_time"
-date: "2019-03-05"
+date: "2019-03-12"
 ---
 
 Is file bloat actually a thing that happens? Are files getting larger at an alarming rate, without much gain?
@@ -161,7 +161,7 @@ legend(
 
 ---
 
-Lets smooth out **gifs**, **swfs**, and **webms** by measuring them over a year long period instead of a month long. We can use the same R code from above.
+Lets smooth out **gifs**, **swfs**, and **webms** by measuring them over a year long period instead of a month long. We can use the same R code from above with very minor changes.
 
 ```sql
 select avg(file_size) / 1000, uploaded_at, file_type

@@ -6,6 +6,8 @@
 
 	--text-color: #eee;
 
+	--table-highlight: #0003;
+
 	--comment: #999;
 	--keyword: #37d;
 	--name: #08b;
@@ -59,6 +61,26 @@ a { color: var(--number); }
 	width: 256px;
 	height: 256px;
 	image-rendering: pixelated;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th {
+	padding: 0.15rem 0.5rem;
+	border-bottom: 1px solid var(--text-color);
+	border-left: 1px solid var(--text-color);
+}
+
+th:first-child { border-left: none; }
+
+tr:nth-child(even) {
+	background-color: var(--table-highlight);
+}
+
+td {
+	padding: 0 0.5rem;
 }
 
 

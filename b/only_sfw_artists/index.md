@@ -23,6 +23,6 @@ having count(*) = count
 
 <ul>
 	{% for artist in site.data.only_sfw_artists %}
-		<li><a href="https://e621.net/post?tags={{ artist.name }}">{{ artist.name }}</a></li>
+		<li><a href="https://e621.net/post?tags={{ artist.name | cgi_escape }}">{{ artist.name }}</a></li>
 	{% endfor %}
 </ul>
