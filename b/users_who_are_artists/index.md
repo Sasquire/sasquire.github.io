@@ -40,7 +40,7 @@ inner join tag_info on(
 )
 ```
 
-Now that we have this, we can apply some constraints. We won’t want any user who has uploaded a single image diluting our results. I have chosen to discard any artist who doesn’t have at least 8 uploads. We also don’t wan’t users who have uploaded many artists’ complete galleries, so we will discard any user that has more than 1000 uploads.
+Now that we have this, we can apply some constraints. We won’t want any user who has uploaded a single image diluting our results. I have chosen to discard any artist who doesn’t have at least 8 uploads. We also don’t want users who have uploaded many artists’ complete galleries, so we will discard any user that has more than 1000 uploads.
 
 We also want to apply a lower bound so we are not getting every single result. To do this, we only keep results where the ***percent of artists posts uploaded by this user*** and ***percent of users uploads with this artist*** are greater than 60% (or 0.6).
 
@@ -59,7 +59,7 @@ from (
 		count(*) over (partition by creator_id) as user_total,
 		count(*) over (partition by tag_name) as artist_total,
 		-- amount of posts with this artist from this user
-		count(*) over (partition by creator_id, tag_name)::float as 	ua_total
+		count(*) over (partition by creator_id, tag_name)::float as ua_total
 	from posts
 	inner join tag_info on(
 		tag_type = 1 and -- tag_type 1 means it's an artist tag
@@ -131,7 +131,7 @@ async function get_username(user_id){
 
 ---
 
-<table>
+<table id="table_data">
 	<thead>
 		<tr>
 			<th>percent of artist uploaded by user</th>
