@@ -1,7 +1,7 @@
 ---
 layout: "default"
 title: "posts_uploaded_by_dow"
-date: "2019-03-14"
+date: "2019-03-18"
 ---
 
 Which day is the most popular to upload posts on? Has this changed over time?
