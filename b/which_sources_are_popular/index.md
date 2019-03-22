@@ -13,31 +13,20 @@ First a simple query to get the sources out of our database.
 select unnest(sources) as source from posts
 ```
 
-Now if we want to parse the URL we can use nodejs's `URL` class, but that will throw errors on urls that do not have a protocol.
-
-Credit where it is due, I used a method from [Felix Kling on StackOverflow](https://stackoverflow.com/a/6168286) who in turn got that from [RFC 3986](https://www.ietf.org/rfc/rfc3986.txt)
-
-Further it is not that usefull to differentiate between most instances of `www.site.com` and `site.com`. Because of that I use [parse-domain](https://www.npmjs.com/package/parse-domain) to extract the domain and tld of the URLs.
+It is not that usefull to differentiate between most instances of `www.site.com` and `site.com`. Because of that I use [parse-domain](https://www.npmjs.com/package/parse-domain) to extract the domain and tld of the URLs.
 
 ```javascript
 const fs = require('fs');
 const parse_domain = require("parse-domain");
-
-function parse_url(url) {
-    const pattern = RegExp("^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?");
-    const matches = url.match(pattern);
-    return {
-        scheme: matches[2],
-        authority: matches[4],
-        path: matches[5],
-        query: matches[7],
-        fragment: matches[9]
-    };
-}
+const { URL } = require('url');
 
 const urls = fs.readFileSync('./data.csv', 'utf8')
 	.split('\n')
-	.map(e => parse_url(e).authority)
+	.map(e => {
+		try {
+			return (new URL(e)).hostname;
+		} catch(error) { /* ignore */ }
+	})
 	.map(e => parse_domain(e))
 	.filter(e => e) // remove undefined
 	.map(e => e.domain + '.' + e.tld)
