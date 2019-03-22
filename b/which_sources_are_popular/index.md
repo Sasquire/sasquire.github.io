@@ -24,10 +24,9 @@ const urls = fs.readFileSync('./data.csv', 'utf8')
 	.split('\n')
 	.map(e => {
 		try {
-			return (new URL(e)).hostname;
+			return parse_domain((new URL(e)).hostname);
 		} catch(error) { /* ignore */ }
 	})
-	.map(e => parse_domain(e))
 	.filter(e => e) // remove undefined
 	.map(e => e.domain + '.' + e.tld)
 	.reduce((acc, e) => {
@@ -35,7 +34,11 @@ const urls = fs.readFileSync('./data.csv', 'utf8')
 		return acc;
 	}, {});
 const ranked_urls = Object.entries(urls)
-	.sort((a, b) => b[1] - a[1]);
+	.sort((a, b) => {
+		const val = b[1] - a[1]; // sort count desc
+		if(val != 0){ return val; }
+		return a[0].localeCompare(b[0]); // sort name desc
+	});
 fs.writeFileSync('./ranked_urls.json', JSON.stringify(ranked_urls));
 ```
 
