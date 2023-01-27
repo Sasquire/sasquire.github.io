@@ -1,0 +1,41 @@
+{
+	"Other": {
+		"href": "https://static1.e621.net/data/37/13/3713da293a66974e3d394b798dee6281.jpg",
+		"x": 1000,
+		"y": 1000,
+		"scale": 0.6
+	},
+	"Lucario": {
+		"href": "https://static1.e621.net/data/9d/f5/9df56ae57c66a20d91ed602da5e057c1.png",
+		"x": 2200,
+		"y": 600,
+		"scale": 0.5
+	},
+	"Arcanine": {
+		"href": "https://static1.e621.net/data/5e/f8/5ef85ecdb85f6bfebd917d14ab724672.png",
+		"x": 1900,
+		"y": 855,
+		"scale": 0.25,
+		"rotation": -60
+	},
+	"Typhlosion": {
+		"href": "https://static1.e621.net/data/5e/f8/5ef85ecdb85f6bfebd917d14ab724672.png",
+		"x": 1925,
+		"y": 1595,
+		"scale": 0.25,
+		"rotation": 180,
+		"flip": true
+	},
+	"Umbreon": {
+		"href": "https://static1.e621.net/data/96/16/9616d290955089c79d389aacd57ac8ae.png",
+		"x": 300,
+		"y": 340,
+		"scale": 0.5
+	},
+	"Charizard": {
+		"href": "https://static1.e621.net/data/d8/14/d814232ca04a642fd30e732b7f8e435d.png",
+		"x": 840,
+		"y": 550,
+		"scale": 0.3
+	}
+}

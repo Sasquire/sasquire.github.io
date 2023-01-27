@@ -1,1 +1,15 @@
+# Generated site that is not comitted
 _site
+
+# Don't think I need these lock files
+package-lock.json
+Gemfile.lock
+
+# Ignore everything in _ignore, except for the empty file so
+# git doesn't ignore the entire folder.
+_ignore/*
+!_ignore/empty.txt
+
+# Other
+node_modules
+.jekyll-metadata

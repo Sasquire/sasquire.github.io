@@ -1,0 +1,27 @@
+exclude: [
+  # Some defaults
+	"vendor/bundle/",
+	"vendor/cache/",
+	"vendor/gems/",
+	"vendor/ruby/",
+  # My work
+  "_code",
+  "_ignore",
+  # Ignore _includes
+  # Ignore _layouts
+  # Ignore _site
+  # Allow blog
+	"node_modules",
+	# Allow static
+	# Ignore _config.yaml
+	".gitattributes",
+  ".gitignore",
+	".jekyll-metadata",
+	# Allow favicon.ico
+	"Gemfile",
+	"Gemfile.lock",
+	# Allow index.md
+	"package-lock.json",
+	"package.json",
+	"run.sh"
+]

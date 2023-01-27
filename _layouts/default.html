@@ -1,11 +1,32 @@
 <html>
 	<head>
+		{% assign links = page.url | split: "/" %}
+		{% assign smaller_size = links.size | minus: 1 %}
+		<base target="_blank" rel="noopener noreferrer">
 	</head>
-	<link href="/default_style.css" rel="stylesheet" type="text/css">
-	<title>{{ page.title }}</title>
+	<link href="/static/default_style.css" rel="stylesheet" type="text/css">
+	{% if page.title %}
+		<title>{{ page.title }}</title>
+	{% else %}
+		<title>{{ links[smaller_size] }}</title>
+	{% endif %}
 	<body>
 		<div id="header">
-			<span id="title">/<a href="/">home</a>/<a href="/b">idem</a>/{{ page.title }}$ █</span>
+			<span id="title"><!--
+				-->/<a href="/">home</a><!--
+				-->/<a href="/">idem</a><!--
+				-->{% for i in (1..smaller_size) %}<!--
+					-->{% assign link_to_i = "/" %}<!--
+					-->{% for j in (1..i) %}<!--
+						-->{% assign link_to_i = link_to_i | append: links[j] | append: "/" %}<!--
+					-->{% endfor %}<!--
+					-->{% if i != smaller_size %}<!--
+						-->/<a href="{{ link_to_i }}">{{ links[i] }}</a><!--
+					-->{% else %}<!--
+						-->/{{ links[i] }}<!--
+					-->{% endif %}<!--
+				-->{% endfor %}$ <span class="blink2s">█</span>
+			</span>
 			<span id="date">{{ page.date }}</span>
 		</div>
 		<div id="content">
@@ -13,3 +34,5 @@
 		</div>
 	</body>
 </html>
+
+

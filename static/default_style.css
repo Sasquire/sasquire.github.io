@@ -1,0 +1,276 @@
+:root {
+	--base-color: #000d; /* I really wanted body and html to be different colors */
+	--header: #fff2;
+	--body: #fff3;
+	--code-background: #0006;
+
+	--text-color: #eee;
+	--chat-color: #ccc;
+
+	--table-highlight: #0003;
+
+	--comment: #999;
+	--keyword: #37d;
+	--name: #08b;
+	--number: #099;
+	--string: #8dd;
+	--regex: #3a8;
+	--error: #a00;
+
+	--sapphire: #0F5ABA;
+}
+
+/* Some other colors */
+.tag-general { color: inherit; }
+.tag-artist { color:#f2ac08; }
+.tag-copyright { color:#d0d; }
+.tag-character { color:#0a0; }
+.tag-species { color:#ed5d1f; }
+.tag-invalid { color: #ff3d3d}
+.tag-meta { color: #fff; }
+.tag-lore { color: #282; }
+
+html { background-color: var(--base-color); }
+
+body {
+	margin: 0px;
+	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+	tab-size: 4;
+	color: var(--text-color);
+}
+
+figure, figure > pre {
+	margin: 0px;
+}
+
+a { color: var(--number); }
+
+table {
+	border-collapse: collapse;
+	width: fit-content;
+}
+
+th {
+	padding: 0.15rem 0.5rem;
+	border-bottom: 1px solid var(--text-color);
+	border-left: 1px solid var(--text-color);
+}
+
+th:first-child { border-left: none; }
+
+tr:nth-child(even) {
+	background-color: var(--table-highlight);
+}
+
+td {
+	padding: 0 0.5rem;
+}
+
+#header {
+	height: 2rem;
+	background-color: var(--header);
+	display: flex;
+	padding-left: 1rem;
+	padding-right: 0.25rem;
+}
+
+#title {
+	font-size: 1.5rem;
+	margin-right: auto;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#date {
+	font-size: 1rem;
+	white-space: nowrap;
+}
+
+#content {
+	background-color: var(--body);
+	padding: 1rem;
+	margin: 1rem;
+	margin-top: 0;
+	border-radius: 0 0 1rem 1rem;
+
+	display: flex;
+	flex-direction: column;
+}
+
+/* Figures are primarily used for displaying large graphs */
+.figure {
+	width: min(80vw, 80vh);
+	height: min(80vw, 80vh);
+	align-self: center;
+}
+
+.figure_link {
+	display: block;
+	cursor: default;
+}
+
+object {
+	pointer-events: none;
+}
+/* End figure */
+
+.small-img {
+	width: 256px;
+	height: 256px;
+	image-rendering: pixelated;
+}
+
+.chat_log {
+	color: var(--chat-color);
+}
+
+.blink2s {
+	animation: blink-animation 2s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+	to { visibility: hidden; }
+}
+
+/* Idea originally from */
+/* https://lancecourse.com/en/howto/how-to-create-a-pure-css-tabbed-menu-widget */
+.tab-wrapper {
+	width: 100%;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	grid-template-columns: repeat(8, 1fr);
+	grid-column-gap: 0.5rem;
+}
+
+.tab-content {
+	grid-column: 1 / 9;
+	grid-row: 2;
+
+	padding: 0.5rem;
+	background-color: var(--code-background);
+
+	flex-direction: column;
+
+	/* Style for hidden tab-content */
+	opacity: 0;
+	display: none;
+}
+
+/* Active tab-content styles */
+.tab-wrapper input[type='radio']:checked + .tab-label + .tab-content {
+	opacity: 1;
+	display: flex;
+}
+
+/* Default label styles */
+.tab-label {
+	cursor: pointer;
+	background-color: var(--body);
+	font-size: 1.25rem;
+	padding: 0.2rem;
+}
+
+/* Active label styles */
+.tab-label:hover, .tab-wrapper input[type='radio']:checked + .tab-label {
+	background-color: var(--code-background);
+}
+
+/* Hide radio buttons */
+.tab-wrapper input[type='radio']{
+	display: none;
+}
+
+
+
+
+/* Code Styling */
+p > .highlighter-rouge,
+.highlight > pre {
+	background-color: var(--code-background);
+	padding: 0.2rem;
+	border-radius: 0.2rem;
+}
+
+/* I think these were useless
+.highlight .w  {  } Text.Whitespace
+.highlight .p  {  } Punctuation
+.highlight .nx {  } Name.Other */
+
+.highlight .gs { font-weight: bold; } /* Generic.Strong */
+.highlight .ge { font-style: italic; } /* Generic.Emph */
+
+.highlight .ne, /* Name.Exception */
+.highlight .gr, /* Generic.Error */
+.highlight .gt  /* Generic.Traceback */
+	{ color: var(--error); }
+
+.highlight .gd .x, /* Generic.Deleted.Specific */
+.highlight .gi .x, /* Generic.Inserted.Specific */
+.highlight .gd, /* Generic.Deleted */
+.highlight .gi, /* Generic.Inserted */
+.highlight .gu, /* Generic.Subheading */
+.highlight .gh, /* Generic.Heading */
+.highlight .go, /* Generic.Output */
+.highlight .gp, /* Generic.Prompt */
+/* same color, but im not sure above gets used */
+.highlight .c,  /* Comment */
+.highlight .cm, /* Comment.Multiline */
+.highlight .c1, /* Comment.Single */
+.highlight .cp, /* Comment.Preproc */
+.highlight .cs  /* Comment.Special */
+	{ color: var(--comment); font-style: italic; } 
+
+.highlight .o, /* Operator */
+.highlight .ow /* Operator.Word */
+	{ font-weight: bold; }
+
+.highlight .k,  /* Keyword */
+.highlight .kc, /* Keyword.Constant */
+.highlight .kd, /* Keyword.Declaration */
+.highlight .kp, /* Keyword.Pseudo */
+.highlight .kr, /* Keyword.Reserved */
+.highlight .kt  /* Keyword.Type */
+	{ color: var(--keyword); font-weight: bold; } 
+
+.highlight .nb, /* Name.Builtin */
+.highlight .nc, /* Name.Class */
+.highlight .ni, /* Name.Entity */
+.highlight .nn, /* Name.Namespace */
+.highlight .bp, /* Name.Builtin.Pseudo */
+.highlight .nt  /* Name.Tag */
+/* I barely see the above used */
+.highlight .nf, /* Name.Function */
+.highlight .na, /* Name.Attribute */
+.highlight .no, /* Name.Constant */
+.highlight .nv, /* Name.Variable */
+.highlight .vc, /* Name.Variable.Class */
+.highlight .vg, /* Name.Variable.Global */
+.highlight .vi  /* Name.Variable.Instance */
+	{ color: var(--name); }
+
+.highlight .m,  /* Literal.Number */
+.highlight .mf, /* Literal.Number.Float */
+.highlight .mh, /* Literal.Number.Hex */
+.highlight .mi, /* Literal.Number.Integer */
+.highlight .mo, /* Literal.Number.Oct */
+.highlight .il  /* Literal.Number.Integer.Long */
+	{ color: var(--number); }
+
+.highlight .sr { color: var(--regex); } /* Literal.String.Regex */
+.highlight .s,  /* Literal.String */
+.highlight .sb, /* Literal.String.Backtick */
+.highlight .ss, /* Literal.String.Symbol */
+.highlight .sc, /* Literal.String.Char */
+.highlight .sd, /* Literal.String.Doc */
+.highlight .s2, /* Literal.String.Double */
+.highlight .se, /* Literal.String.Escape */
+.highlight .sh, /* Literal.String.Heredoc */
+.highlight .si, /* Literal.String.Interpol */
+.highlight .sx, /* Literal.String.Other */
+.highlight .s1, /* Literal.String.Single */
+.highlight .err /* Error */
+	{ color: var(--string); }
+/* There seems to be an issue with the err highlighting,
+   It picks up on my backslashes in a string with single quotes
+   Just going to make it the same as a string so it looks nice. */

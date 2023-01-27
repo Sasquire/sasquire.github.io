@@ -1,0 +1,5 @@
+<input type="radio" name="tab{{ include.index }}" id="tab{{ include.index }}{{ include.sub_index }}" {% if include.sub_index == "a" %} checked {% endif %}>
+<label class="tab-label" for="tab{{ include.index }}{{ include.sub_index }}">{{ include.name }}</label>
+<div class="tab-content">
+	{{ include.content }}
+</div>
