@@ -20,12 +20,12 @@ date: ""
 				{% assign links = page.url | split: "/" %}
 				{% if page.cname %} <!-- Include if there is a custom name -->
 					<tr>
-						<td><a href="{{ page.url }}">{{ page.cname }}</a></td>
+						<td><a href="{{ page.url }}" target="_self">{{ page.cname }}</a></td>
 						<td>{{ page.date }}</td>
 					</tr>
 				{% elsif links.size == 3 %} <!-- Size of 3 only includes first level directories -->
 					<tr>
-						<td><a href="{{ page.url }}">{{ links[2] }}</a></td>
+						<td><a href="{{ page.url }}" target="_self">{{ links[2] }}</a></td>
 						<td>{{ page.date }}</td>
 					</tr>
 				{% endif %}

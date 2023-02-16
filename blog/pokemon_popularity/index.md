@@ -56,7 +56,7 @@ Generating the list of artists is not hard either. I could have included the art
 	{% endcapture %}
 	{% include components/tab_item.html 
 		index = "2" sub_index = "a"
-		name = "Artist List"
+		name = "Artist&nbsp;List"
 		content = tab_content
 	%}
 

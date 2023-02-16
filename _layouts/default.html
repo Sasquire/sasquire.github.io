@@ -13,15 +13,15 @@
 	<body>
 		<div id="header">
 			<span id="title"><!--
-				-->/<a href="/">home</a><!--
-				-->/<a href="/">idem</a><!--
+				-->/<a target="_self" href="/">home</a><!--
+				-->/<a target="_self" href="/">idem</a><!--
 				-->{% for i in (1..smaller_size) %}<!--
 					-->{% assign link_to_i = "/" %}<!--
 					-->{% for j in (1..i) %}<!--
 						-->{% assign link_to_i = link_to_i | append: links[j] | append: "/" %}<!--
 					-->{% endfor %}<!--
 					-->{% if i != smaller_size %}<!--
-						-->/<a href="{{ link_to_i }}">{{ links[i] }}</a><!--
+						-->/<a href="{{ link_to_i }}" target="_self">{{ links[i] }}</a><!--
 					-->{% else %}<!--
 						-->/{{ links[i] }}<!--
 					-->{% endif %}<!--
@@ -30,7 +30,7 @@
 			<span id="date">{{ page.date }}</span>
 		</div>
 		<div id="content">
-		{{ content }}
+			{{ content }}
 		</div>
 	</body>
 </html>

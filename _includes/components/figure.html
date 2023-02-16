@@ -1,7 +1,11 @@
 <div class="figure">
-	<a href="{{ include.link }}" class="figure_link" onclick="return false;">
-		<object data="{{ include.link }}" type="image/svg+xml">
-			{{ include.inside }}
-		</object>
-	</a>
+	{% if include.type == "static_image" %}
+		<img src="{{ include.link }}" alt="{{ include.inside }}" />
+	{% else %}
+		<a href="{{ include.link }}" class="figure_link" onclick="return false;">
+			<object data="{{ include.link }}" type="image/svg+xml">
+				{{ include.inside }}
+			</object>
+		</a>
+	{% endif %}
 </div>
