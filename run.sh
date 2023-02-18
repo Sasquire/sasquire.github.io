@@ -4,7 +4,7 @@ for var in "$@"; do
 	if [ "$var" = "scripts" ]; then
 		# https://stackoverflow.com/questions/4321456/find-exec-a-shell-function-in-linux
 		echo "Running scripts"
-		find ./blog/ -type f -name "main.mjs" | while read file; do
+		find ./blogs/ -type f -name "main.mjs" | while read file; do
 			echo "Running $file"
 			node "$file"
 		done
