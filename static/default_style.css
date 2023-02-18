@@ -18,17 +18,25 @@
 	--error: #a00;
 
 	--sapphire: #0F5ABA;
+
+	--tag-artist: #f2ac08;
+	--tag-copyright : #d0d;
+	--tag-character : #0a0;
+	--tag-species : #ed5d1f;
+	--tag-invalid : #ff3d3d;
+	--tag-meta : #fff;
+	--tag-lore : #282;
 }
 
 /* Some other colors */
 .tag-general { color: inherit; }
-.tag-artist { color:#f2ac08; }
-.tag-copyright { color:#d0d; }
-.tag-character { color:#0a0; }
-.tag-species { color:#ed5d1f; }
-.tag-invalid { color: #ff3d3d}
-.tag-meta { color: #fff; }
-.tag-lore { color: #282; }
+.tag-artist { color: var(--tag-artist); }
+.tag-copyright { color: var(--tag-copyright); }
+.tag-character { color: var(--tag-character); }
+.tag-species { color: var(--tag-species); }
+.tag-invalid { color: var(--tag-invalid); }
+.tag-meta { color: var(--tag-meta); }
+.tag-lore { color: var(--tag-lore); }
 
 html { background-color: var(--base-color); }
 
