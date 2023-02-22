@@ -1,0 +1,79 @@
+Statistics for size of 10000 (n = 480)
+Final lazy average of 2.1229
+Final regular average of 1.5511
+
+Statistics for size of 20000 (n = 550)
+Final lazy average of 4.0771
+Final regular average of 3.1854
+
+Statistics for size of 30000 (n = 503)
+Final lazy average of 6.5147
+Final regular average of 5.0976
+
+Statistics for size of 40000 (n = 467)
+Final lazy average of 7.6646
+Final regular average of 5.8899
+
+Statistics for size of 50000 (n = 505)
+Final lazy average of 9.3492
+Final regular average of 7.2016
+
+Statistics for size of 60000 (n = 461)
+Final lazy average of 13.458
+Final regular average of 10.7486
+
+Statistics for size of 70000 (n = 526)
+Final lazy average of 15.4366
+Final regular average of 12.3929
+
+Statistics for size of 80000 (n = 495)
+Final lazy average of 16.4056
+Final regular average of 13.2401
+
+Statistics for size of 90000 (n = 477)
+Final lazy average of 18.2124
+Final regular average of 14.5482
+
+Statistics for size of 100000 (n = 502)
+Final lazy average of 20.2959
+Final regular average of 16.5047
+
+Statistics for size of 110000 (n = 471)
+Final lazy average of 22.8225
+Final regular average of 17.947
+
+Statistics for size of 120000 (n = 520)
+Final lazy average of 25.6252
+Final regular average of 20.3387
+
+Statistics for size of 130000 (n = 511)
+Final lazy average of 27.9891
+Final regular average of 22.2645
+
+Statistics for size of 140000 (n = 490)
+Final lazy average of 28.1774
+Final regular average of 22.1686
+
+Statistics for size of 150000 (n = 521)
+Final lazy average of 27.8976
+Final regular average of 22.5158
+
+Statistics for size of 160000 (n = 486)
+Final lazy average of 35.2152
+Final regular average of 28.541
+
+Statistics for size of 170000 (n = 489)
+Final lazy average of 36.9335
+Final regular average of 29.7045
+
+Statistics for size of 180000 (n = 540)
+Final lazy average of 36.7676
+Final regular average of 29.7667
+
+Statistics for size of 190000 (n = 491)
+Final lazy average of 41.1355
+Final regular average of 33.8442
+
+Statistics for size of 200000 (n = 515)
+Final lazy average of 38.1015
+Final regular average of 31.1814
