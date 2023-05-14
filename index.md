@@ -14,6 +14,6 @@ And for the biggest projects, they can be found on [my github](https://github.co
 
 <br>
 
-If you're a weirdo, you might be looking for the [commissions](https://sasquire.github.io/commissions/) I have gotten. This is really for my own organization anyhow.
+If you're a weirdo, you might be looking for the [commissions](/commissions/) I have gotten. This is really for my own organization anyhow.
 
 <!-- .i mi ba co'a ciska ti bau la .lojban. .i tu'a zo lojbo cu stuzi le se ciska -->

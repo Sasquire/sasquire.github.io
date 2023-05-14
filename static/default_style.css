@@ -215,6 +215,7 @@ object {
 
 /* Code Styling */
 p > .highlighter-rouge,
+li > .highlighter-rouge,
 .highlight > pre {
 	background-color: var(--code-background);
 	padding: 0.2rem;
