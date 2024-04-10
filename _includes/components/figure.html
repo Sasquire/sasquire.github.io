@@ -1,6 +1,12 @@
 <div class="figure">
 	{% if include.type == "static_image" %}
 		<img src="{{ include.link }}" alt="{{ include.inside }}" />
+	{% elsif include.type == "encrypted_image" %}
+		<div class="encryption_authentication_wrapper" data-href="{{ include.link }}">
+			<h1>This file requires authentication to view</h1>
+			<input type="text" placeholder="password">
+			<button onclick="decrypt_and_replace_wrappers.call(this)">Authenticate</button>
+		</div>
 	{% else %}
 		<a href="{{ include.link }}" class="figure_link" onclick="return false;">
 			<object data="{{ include.link }}" type="image/svg+xml">

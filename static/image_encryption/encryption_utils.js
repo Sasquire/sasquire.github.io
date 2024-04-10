@@ -85,8 +85,11 @@ async function encrypt (file_buffer, password_buffer) {
 	};
 }
 
-async function decrypt (encrypted_file_buffer, password_buffer) {
-	const key = await generate_key_from_password(password_buffer);
+async function decrypt (encrypted_file_buffer, password_buffer, key) {
+	if (key === undefined) {
+		key = await generate_key_from_password(password_buffer);
+	}
+
 	const {iv, data} = JSON.parse(buffer_to_string(encrypted_file_buffer));
 
 	const iv_buffer = base64_to_buffer(iv);
@@ -99,4 +102,50 @@ async function decrypt (encrypted_file_buffer, password_buffer) {
 	);
 	
 	return decrypted_buffer;
+}
+
+async function decrypt_and_replace_wrappers () {
+	const button = this;
+	const this_wrapper = button.parentNode;
+	const tab = this_wrapper.parentNode.parentNode.parentNode;
+	const all_wrappers = Array.from(tab.querySelectorAll('.encryption_authentication_wrapper'));
+	
+	all_wrappers.forEach(e => set_message(e, 'Generating key.'));
+	const password = this_wrapper.querySelector('input').value;
+	const password_buffer = string_to_buffer(password);
+	const key = await generate_key_from_password(password_buffer);
+
+	await Promise.all(all_wrappers.map(async wrapper => {
+		set_message(wrapper, 'Downloading image.');
+		const image_link = wrapper.dataset.href;
+		const encrypted_buffer = await fetch(image_link)
+			.then(e => { if (e.ok) { return e.arrayBuffer() } else { throw new Error("Not 2xx response"); } })
+			.catch(e => { set_message(wrapper, 'Error while downloading file.'); throw e; });
+
+		set_message(wrapper, 'Decrypting image.');
+		const image_data = await decrypt(encrypted_buffer, null, key)
+			.catch(e => { set_message(wrapper, 'Error while decrypting file.'); throw e; });
+
+			
+		set_message(wrapper, 'Displaying image.');
+		const image = await buffer_to_img(image_data);
+		wrapper.parentNode.replaceChildren(image);
+	}));
+
+	function set_message (wrapper, message) {
+		const now = new Date().toTimeString().split(' ')[0];
+		wrapper.querySelector('h1').textContent = `${now}. ${message}`;
+	}
+
+	async function buffer_to_img (buffer) {
+		return new Promise(resolve => {
+			const blob = new Blob([buffer], {type: 'image/png'})
+			const url = URL.createObjectURL(blob);
+			let img = new Image();
+			img.onload = () => {
+				resolve(img);
+			}
+			img.src = url;
+		});
+	}
 }
