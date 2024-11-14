@@ -1,6 +1,6 @@
 ---
 layout: "default"
-date: "2024-04-07"
+date: "​2024-04-07"
 artist: "troutsworth"
 commission_type: "_fursona"
 ---

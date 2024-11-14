@@ -37,7 +37,8 @@ This is mostly an odds and ends directory for my own benefit. I guess other peop
 		</tr>
 	</thead>
 	<tbody>
-		{% for page in item.items %}
+		{% assign sorted_pages = item.items | sort: "date" | reverse %}
+		{% for page in sorted_pages %}
 			{% assign links = page.url | split: "/" %}
 			{% if page.cname %} <!-- Include if there is a custom name -->
 				<tr>
