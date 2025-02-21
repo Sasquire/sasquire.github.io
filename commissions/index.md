@@ -19,6 +19,8 @@ This is mostly an odds and ends directory for my own benefit. I guess other peop
 
 {% if item.name == "_fursona" %}
 ## Artwork of my fursona
+{% elsif item.name == "others_characters" %}
+## Artwork I've commissioned of characters I don't own
 {% elsif item.name == "miscellaneous" %}
 ## Strange artwork that I have commissioned
 {% elsif item.name == "magic_the_gathering" %}
