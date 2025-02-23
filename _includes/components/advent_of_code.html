@@ -1,0 +1,137 @@
+{% capture todays_file %}day_{{ include.day }}.rs{% endcapture %}
+
+<p id="advent_of_code_container">
+	<span>Loading code...</span>
+</p>
+
+<div class="tab-wrapper">
+	{% capture tab_content %}{% highlight rust %}{%
+		include_relative {{ todays_file }}
+	%}{% endhighlight %}{% endcapture %}
+	{% include components/tab_item.html 
+		index = "1" sub_index = "a"
+		name = todays_file
+		content = tab_content
+	%}
+</div>
+
+<!-- worker.js -->
+<script id="script_worker" type="javascript/worker">
+	let wasm_bindgen = null;
+
+	// https://stackoverflow.com/questions/61406859
+	self.addEventListener('unhandledrejection', function (event) {
+		// the event object has two special properties:
+		// event.promise - the promise that generated the error
+		// event.reason  - the unhandled error object
+		throw event.reason;
+	});
+
+	self.onmessage = async function (event) {
+		const data = event.data;
+
+		if (data.message === "import_javascript") {
+			// Import from the given URL (which is a blob) because doesn't work otherwise
+			wasm_bindgen = await import(data.script_url);
+			await wasm_bindgen.default(data.wasm_url); // init wasm_bindgen
+		} else if (data.message === "call_function") {
+			if (wasm_bindgen === null) {
+				return setTimeout(() => self.postMessage(event.data), 1000);
+			}
+
+			let response = wasm_bindgen[data.function_name](data.input);
+			self.postMessage({ function_name: data.function_name, response });
+		}
+	};
+</script>
+
+<script type="module">
+	// For some reason I can not pass the relative URL to the Web Worker.
+	// I have to create a local blob and then pass that to the inline worker.
+	// I think this is because the Web Worker does not have access to `window`
+	// This downloads the script in the main thread and passes a URL to the WW to be downloaded.
+	const inline_worker = await (async () => {
+		const inline_text = document.getElementById('script_worker').textContent;
+		const inline_blob = new Blob([inline_text], { type: 'application/javascript' });
+		const inline_url = window.URL.createObjectURL(inline_blob);
+		const inline_worker = new Worker(inline_url, { type: 'module' });
+
+		const bindgen_response = await fetch('./../../pkg/Advent_of_Code_{{ include.year }}.js');
+		const bindgen_text = await bindgen_response.text();
+		const bindgen_blob = new Blob([bindgen_text], { type: 'application/javascript' });
+		const bindgen_url = URL.createObjectURL(bindgen_blob);
+
+		const wasm_response = await fetch('./../../pkg/Advent_of_Code_{{ include.year }}_bg.wasm');
+		const wasm_blob = await wasm_response.blob();
+		const wasm_url = URL.createObjectURL(wasm_blob);
+		inline_worker.postMessage({
+			message: 'import_javascript',
+			script_url: bindgen_url,
+			wasm_url: { module_or_path: wasm_url }
+		});
+
+		return inline_worker;
+	})();
+	
+	const input_id = 'puzzle_text_input';
+	const output_id = 'puzzle_answer';
+	const default_output = 'Click a button!'
+	const waiting_output = 'Running code...';
+	const error_output = 'There was an error running the code! Bad input maybe?'
+	let worker_is_running = false;
+
+	inline_worker.onerror = function (event) {
+		worker_is_running = false;
+		document.getElementById(output_id).textContent = error_output;
+		console.log(`Error from Web Worker: ${event.message}`);
+	}
+
+	inline_worker.onmessage = function (event) {
+		worker_is_running = false;
+		document.getElementById(output_id).textContent = event.data.response;
+	}
+
+	inline_worker.query = function (function_name, input) {
+		if (worker_is_running === false) {
+			worker_is_running = true;
+			document.getElementById(output_id).textContent = waiting_output;
+			
+			inline_worker.postMessage({
+				message: 'call_function',
+				function_name,
+				input
+			});
+		}
+	}
+
+	function make_button (part) {
+		const button = document.createElement('button');
+		button.textContent = `Part ${part}`;
+		button.style.margin = '0.5rem 1rem 0 1rem';
+
+		button.addEventListener('click', () => {
+			const function_name = `day_{{ include.day }}_${part}`;
+			const input_text = document.getElementById(input_id).value;
+			inline_worker.query(function_name, input_text)
+		});
+
+		return button;
+	}
+
+	const input = document.createElement('textarea');
+	input.id = input_id;
+	input.placeholder = 'Puzzle Input';
+
+	const run_1 = make_button(1);
+	const run_2 = make_button(2);
+
+	const answer = document.createElement('span');
+	answer.id = output_id;
+	answer.textContent = default_output;
+
+	document.getElementById('advent_of_code_container').replaceChildren(
+		input, document.createElement('br'),
+		run_1, run_2, document.createElement('br'),
+		answer
+	);
+</script>

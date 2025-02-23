@@ -23,5 +23,7 @@ exclude: [
 	# Allow index.md
 	"package-lock.json",
 	"package.json",
-	"run.sh"
+	"run.sh",
+  
+  "projects/Advent-of-Code-2015/target"
 ]

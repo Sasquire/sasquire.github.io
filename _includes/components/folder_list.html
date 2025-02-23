@@ -1,0 +1,56 @@
+<table>
+	<thead>
+		<tr>
+			{% assign attributes = include.display_attributes | split: " " %}
+			{% for attribute in attributes %}
+				<th>{{ attribute | capitalize }}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% comment %} 
+			Sort pages by date or provided attribute
+			Could be "date" or "name" or anything
+			sort_natural is case insensitive
+		{% endcomment %}
+		{% assign sorting_attribute = "date" %}
+		{% if include.sorting_attribute %}
+			{% assign sorting_attribute = include.sorting_attribute %}
+		{% endif %}
+
+		{% assign sorted_pages = site.pages | sort_natural: sorting_attribute %}
+		{% if include.sorting_reversed %}
+			{% assign sorted_pages = sorted_pages | reverse %}
+		{% endif %}
+		
+		{% for page in sorted_pages %}
+			{% assign attribute_filter_a = include.attribute_filter_a | split: " " %}
+			{% if page[attribute_filter_a.first] != attribute_filter_a[1] %}
+				{% continue %}
+			{% endif %}
+		
+			{% assign num_folders_required = include.folder_to_scan | split: "/" | size | plus: 1 %}
+			{% assign file_type = page.url | split:'.' | last %}
+			{% assign folders = page.url | split: "/" %}
+
+			{% assign display_name = folders[-1] %}
+			{% if page.cname %}
+				{% assign display_name = page.cname %}
+			{% endif %}
+
+			{% if true
+				and page.url contains include.folder_to_scan
+				and file_type != "html"
+				and folders.size == num_folders_required %}
+				
+				<tr> {% for attribute in attributes %}
+					{% if attribute == "name" %}
+						<td><a href="{{ page.url }}" target="_self">{{ display_name }}</a></td>
+					{% else %}
+						<td>{{ page[attribute] }}</td>
+					{% endif %}
+				{% endfor %} </tr>
+			{% endif %}
+		{% endfor %}
+	</tbody>
+</table>
