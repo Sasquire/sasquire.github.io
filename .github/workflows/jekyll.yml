@@ -43,6 +43,31 @@ jobs:
           repository: sasquire/E621-Tag-Categories
           path: projects/E621-Tag-Categories
 
+      # Utilities for Compiling AoC projects
+      - name: Install rust cargo
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      # Should both be installed with cargo? Should I make a thing for bundle?
+      - name: Install wasm-pack
+        uses: jetli/wasm-pack-action@v0.4.0
+      - name: Install build-licenses from crates.io
+        uses: baptiste0928/cargo-install@v3
+        with:
+          crate: cargo-bundle-licenses
+      # Actual AoC Projects
+      - name: Checkout AoC 2015 Project
+        uses: actions/checkout@v4
+        with:
+          repository: sasquire/Advent-of-Code-2015
+          path: projects/Advent-of-Code-2015
+      - name: Build AoC 2015 wasm
+        working-directory: projects/Advent-of-Code-2015
+        run: wasm-pack build --release --no-pack --no-typescript --target web
+      - name: Compile AoC 2015 Licenses
+        working-directory: projects/Advent-of-Code-2015
+        run: cargo bundle-licenses --prefer MIT --format toml --output ./pkg/THIRD_PARTY_LICENSES.toml
+
       - name: Setup Ruby
         # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
