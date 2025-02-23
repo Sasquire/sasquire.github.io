@@ -24,6 +24,17 @@
 		{% endif %}
 		
 		{% for page in sorted_pages %}
+			{% unless page.url contains include.folder_to_scan %}
+				{% continue %}
+			{% endunless %}
+
+			{% assign num_folders_required = include.folder_to_scan | split: "/" | size | plus: 1 %}
+			{% assign file_type = page.url | split:'.' | last %}
+			{% assign folders = page.url | split: "/" %}
+			{% if folders.size != num_folders_required %}
+				{% continue %}
+			{% endif %}
+
 			{% assign all_pairs_match = true %}
 			{% assign pairs = include.attribute_filters | split: " " %}
 			{% for pair_ in pairs %}
@@ -32,33 +43,24 @@
 					{% assign all_pairs_match = false %}
 				{% endif %}	
 			{% endfor %}
-
 			{% if all_pairs_match == false %}
 				{% continue %}
 			{% endif %}
-		
-			{% assign num_folders_required = include.folder_to_scan | split: "/" | size | plus: 1 %}
-			{% assign file_type = page.url | split:'.' | last %}
-			{% assign folders = page.url | split: "/" %}
 
 			{% assign display_name = folders[-1] %}
 			{% if page.cname %}
 				{% assign display_name = page.cname %}
 			{% endif %}
 
-			{% if true
-				and page.url contains include.folder_to_scan
-				and file_type != "html"
-				and folders.size == num_folders_required %}
-				
-				<tr> {% for attribute in attributes %}
-					{% if attribute == "name" %}
-						<td><a href="{{ page.url }}" target="_self">{{ display_name }}</a></td>
-					{% else %}
-						<td>{{ page[attribute] }}</td>
-					{% endif %}
-				{% endfor %} </tr>
-			{% endif %}
+			<tr> 
+			{% for attribute in attributes %}
+				{% if attribute == "name" %}
+					<td><a href="{{ page.url }}" target="_self">{{ display_name }}</a></td>
+				{% else %}
+					<td>{{ page[attribute] }}</td>
+				{% endif %}
+			{% endfor %}
+			</tr>
 		{% endfor %}
 	</tbody>
 </table>
