@@ -24,11 +24,11 @@ This is mostly an odds and ends directory for my own benefit. I guess other peop
 	{% endif %}
 
 {% comment %} I don't know why I need to use capture {% endcomment %}
-{% capture artwork_filter %}commission_type {{ type }}{% endcapture %}
+{% capture artwork_filter %}commission_type={{ type }}{% endcapture %}
 {% include components/folder_list.html
 	folder_to_scan = "/commissions"
 	display_attributes = "name artist date"
-	attribute_filter_a = artwork_filter
+	attribute_filters = artwork_filter
 
 	sorting_attribute = "date"
 	sorting_reversed = "true"

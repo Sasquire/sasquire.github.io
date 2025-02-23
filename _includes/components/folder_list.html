@@ -24,8 +24,16 @@
 		{% endif %}
 		
 		{% for page in sorted_pages %}
-			{% assign attribute_filter_a = include.attribute_filter_a | split: " " %}
-			{% if page[attribute_filter_a.first] != attribute_filter_a[1] %}
+			{% assign all_pairs_match = true %}
+			{% assign pairs = include.attribute_filters | split: " " %}
+			{% for pair_ in pairs %}
+				{% assign pair = pair_ | split: "=" %}
+				{% if page[pair.first] != pair[1] %}
+					{% assign all_pairs_match = false %}
+				{% endif %}	
+			{% endfor %}
+
+			{% if all_pairs_match == false %}
 				{% continue %}
 			{% endif %}
 		
