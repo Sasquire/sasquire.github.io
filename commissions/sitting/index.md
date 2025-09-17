@@ -5,7 +5,7 @@ artist: "oreobird"
 commission_type: "_fursona"
 ---
 
-Art by the creative [Oreobird](https://www.furaffinity.net/user/oreobird/). Another piece gifted to me by a patron of Oerobird. I'm not a patron myself but maybe I should be soon.
+Art by the creative [Oreobird](https://www.furaffinity.net/user/oreobird/). Another piece gifted to me by a patron of Oreobird. I'm not a patron myself but maybe I should be soon.
 
 <script src="/static/image_encryption/encryption_utils.js"></script>
 <div class="tab-wrapper">
