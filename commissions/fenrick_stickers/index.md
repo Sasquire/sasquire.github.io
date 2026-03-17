@@ -116,14 +116,27 @@ Art by the diligent [Troutsworth](https://www.furaffinity.net/user/troutsworth/)
 
 	{% capture tab_content %}
 		{% include components/figure.html 
-			link = "./woobie.png"
+			link = "./woobie1.png"
 			inside = ""
 			type = "static_image"
 		%}
 	{% endcapture %}
 	{% include components/tab_item.html 
 		index = "2" sub_index = "c"
-		name = "./woobie.png"
+		name = "./woobie1.png"
+		content = tab_content
+	%}
+
+	{% capture tab_content %}
+		{% include components/figure.html 
+			link = "./woobie2.png"
+			inside = ""
+			type = "static_image"
+		%}
+	{% endcapture %}
+	{% include components/tab_item.html 
+		index = "2" sub_index = "c"
+		name = "./woobie2.png"
 		content = tab_content
 	%}
 
@@ -137,6 +150,32 @@ Art by the diligent [Troutsworth](https://www.furaffinity.net/user/troutsworth/)
 	{% include components/tab_item.html 
 		index = "2" sub_index = "d"
 		name = "./pissed.png"
+		content = tab_content
+	%}
+
+	{% capture tab_content %}
+		{% include components/figure.html 
+			link = "./happy.png"
+			inside = ""
+			type = "static_image"
+		%}
+	{% endcapture %}
+	{% include components/tab_item.html 
+		index = "2" sub_index = "e"
+		name = "./happy.png"
+		content = tab_content
+	%}
+
+	{% capture tab_content %}
+		{% include components/figure.html 
+			link = "./dream.png"
+			inside = ""
+			type = "static_image"
+		%}
+	{% endcapture %}
+	{% include components/tab_item.html 
+		index = "2" sub_index = "f"
+		name = "./dream.png"
 		content = tab_content
 	%}
 
